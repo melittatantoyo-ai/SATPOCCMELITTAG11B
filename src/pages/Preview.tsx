@@ -58,20 +58,20 @@ function Preview() {
 
   return (
     <div className="preview-grid">
-      {data.shopping_results.slice(0, 16).map((item, index) => (
-        <div className="preview-card" key={index}>
-          <p className="preview-card__source">{item.source}</p>
-
-          <h1 className="preview-card__title">{item.title}</h1>
-
-          <img
-            className="preview-card__image"
-            src={item.thumbnail}
-            alt={item.title}
-          />
-        </div>
-      ))}
-    </div>
+  {data?.shopping_results?.slice(0, 16).map(
+    (item: ShoppingItem, index: number) => (
+      <div className="preview-card" key={index}>
+        <p className="preview-card__source">{item.source}</p>
+        <h1 className="preview-card__title">{item.title}</h1>
+        <img
+          className="preview-card__image"
+          src={item.thumbnail}
+          alt={item.title}
+        />
+      </div>
+    )
+  )}
+</div>
   );
 }
 

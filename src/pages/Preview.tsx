@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import "../index.css";
 
-type ShoppingItem = {
+interface ShoppingItem {
   source: string;
   title: string;
   thumbnail: string;
-};
+}
 
-type ApiResponse = {
+interface DataType {
   shopping_results: ShoppingItem[];
-};
+}
 
 function Preview() {
-  const [data, setData] = useState<ApiResponse | null>(null);
+  const [data, setData] = useState<DataType | null>(null);
 
-  const API_KEY =
-    "30aea772d3cd7b6a7e69ea460719809473b55459c346738bde871eb91ce9e5ec";
+  const API_KEY = "30aea772d3cd7b6a7e69ea460719809473b55459c346738bde871eb91ce9e5ec";
 
   const ENDPOINT = "https://serpapi.com/search";
 
@@ -40,7 +39,7 @@ function Preview() {
 
     fetch("https://corsproxy.io/?" + encodeURIComponent(serpUrl))
       .then((res) => res.json())
-      .then((result: ApiResponse) => {
+      .then((result: DataType) => {
         console.log(result);
         setData(result);
       })
@@ -59,23 +58,19 @@ function Preview() {
 
   return (
     <div className="preview-grid">
-      {data.shopping_results
-        .slice(0, 12)
-        .map((item: ShoppingItem, index: number) => (
-          <div className="preview-card" key={index}>
-            <p className="preview-card__source">{item.source}</p>
+      {data.shopping_results.slice(0, 16).map((item, index) => (
+        <div className="preview-card" key={index}>
+          <p className="preview-card__source">{item.source}</p>
 
-            <h1 className="preview-card__title">
-              {item.title}
-            </h1>
+          <h1 className="preview-card__title">{item.title}</h1>
 
-            <img
-              className="preview-card__image"
-              src={item.thumbnail}
-              alt={item.title}
-            />
-          </div>
-        ))}
+          <img
+            className="preview-card__image"
+            src={item.thumbnail}
+            alt={item.title}
+          />
+        </div>
+      ))}
     </div>
   );
 }

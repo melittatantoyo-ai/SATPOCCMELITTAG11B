@@ -62,6 +62,7 @@ function Preview() {
     (item: ShoppingItem, index: number) => (
       <div className="preview-card" key={index}>
         <p className="preview-card__source">{item.source}</p>
+
         <h1 className="preview-card__title">{item.title}</h1>
         <img
           className="preview-card__image"
